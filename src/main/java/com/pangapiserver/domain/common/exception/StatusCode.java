@@ -1,6 +1,8 @@
 package com.pangapiserver.domain.common.exception;
 
+import org.springframework.http.HttpStatus;
+
 public interface StatusCode {
-    int getStatus();
+    HttpStatus getHttpStatus();
     String getMessage();
 }
