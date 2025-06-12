@@ -10,7 +10,6 @@ import com.pangapiserver.infrastructure.common.dto.BaseResponse;
 import com.pangapiserver.application.follow.data.FollowingResponse;
 import com.pangapiserver.infrastructure.security.support.UserAuthenticationHolder;
 
-
 @Component
 @RequiredArgsConstructor
 public class FollowUseCase {
@@ -18,7 +17,7 @@ public class FollowUseCase {
     private final UserAuthenticationHolder userAuthHolder;
 
     public BaseResponse<List<FollowingResponse>> getFollowings(String username) {
-        return BaseResponse.ok(HttpStatus.OK, service.getByFollowing(username));
+        return BaseResponse.ok(HttpStatus.OK, service.getByFollowing(isNull(username)));
     }
 
     public BaseResponse<List<FollowingResponse>> getFollowers(String username) {
