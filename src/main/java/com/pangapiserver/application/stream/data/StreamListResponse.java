@@ -1,10 +1,8 @@
 package com.pangapiserver.application.stream.data;
 
+import java.util.List;
 import com.pangapiserver.domain.user.entity.UserEntity;
 import com.pangapiserver.domain.stream.entity.StreamEntity;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public record StreamListResponse (
         String nickname,
@@ -17,7 +15,7 @@ public record StreamListResponse (
     public static List<StreamListResponse> of(List<StreamEntity> items) {
         return items.stream()
                 .map(StreamListResponse::toEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static StreamListResponse toEntity(StreamEntity stream) {
