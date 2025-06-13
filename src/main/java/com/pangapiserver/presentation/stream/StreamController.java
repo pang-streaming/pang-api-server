@@ -1,10 +1,9 @@
 package com.pangapiserver.presentation.stream;
 
+import com.pangapiserver.infrastructure.common.dto.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import com.pangapiserver.application.stream.StreamUseCase;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.pangapiserver.application.stream.data.StreamListResponse;
 import java.util.List;
 

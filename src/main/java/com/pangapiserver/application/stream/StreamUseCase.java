@@ -1,5 +1,6 @@
 package com.pangapiserver.application.stream;
 
+import com.pangapiserver.infrastructure.common.dto.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import com.pangapiserver.domain.stream.entity.StreamEntity;
