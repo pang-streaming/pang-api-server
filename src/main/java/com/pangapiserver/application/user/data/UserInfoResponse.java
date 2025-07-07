@@ -31,7 +31,7 @@ public record UserInfoResponse(
             user.getProfileImage(),
             user.getBannerImage(),
             user.isAdult(),
-            user.getRole(),
+            user.getRoles(),
             user.isAlarm()
         );
     }

@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
@@ -21,7 +20,7 @@ public class TokenProvider {
         return Jwts.builder()
             .claim("category", tokenType.name())
             .claim("email", user.getEmail())
-            .claim("role", user.getRole())
+            .claim("role", user.getRoles())
             .claim("username", user.getUsername())
             .issuedAt(new Date(currentTimeMillis()))
             .expiration(new Date(currentTimeMillis() + getTokenExpire(tokenType)))

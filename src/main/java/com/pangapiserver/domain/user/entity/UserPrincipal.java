@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public record UserPrincipal(UserEntity user) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton((GrantedAuthority) user.getRole()::getValue);
+        return Collections.singleton((GrantedAuthority) user.getRoles()::getValue);
     }
 
     @Override
