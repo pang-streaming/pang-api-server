@@ -59,4 +59,14 @@ public class FollowCustomRepositoryImpl implements FollowCustomRepository {
             .where(followEntity.follower.eq(user))
             .fetch();
     }
+
+    public void deleteByUserOrFollower(UserEntity user) {
+        QFollowEntity followEntity = QFollowEntity.followEntity;
+
+        jpaQueryFactory
+                .delete(followEntity)
+                .where(followEntity.user.eq(user)
+                .or(followEntity.follower.eq(user)))
+                .execute();
+    }
 }

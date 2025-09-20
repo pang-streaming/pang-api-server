@@ -55,4 +55,9 @@ public class UserService {
                 )
             ).collect(Collectors.toList());
     }
+
+    public void deleteByUser(UserEntity user) {
+        followCustomRepository.deleteByUserOrFollower(user);
+        repository.delete(user);
+    }
 }

@@ -8,13 +8,16 @@ import com.pangapiserver.domain.cash.service.CashService;
 import com.pangapiserver.domain.user.entity.UserEntity;
 import com.pangapiserver.domain.user.service.UserService;
 import com.pangapiserver.infrastructure.common.dto.DataResponse;
+import com.pangapiserver.infrastructure.common.dto.Response;
 import com.pangapiserver.infrastructure.security.support.UserAuthenticationHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class UserUseCase {
     private final UserAuthenticationHolder holder;
@@ -33,12 +36,16 @@ public class UserUseCase {
         service.update(user);
     }
 
-
-
     public DataResponse<List<UserListResponse>> getUsers() {
         UserEntity me = holder.current();
         List<UserEntity> users = service.getUsers(me.getId());
         List<FollowerCountResponse> followers = service.getFollowers(me.getId());
         return DataResponse.ok("유저 목록 조회 성공", UserListResponse.of(users, followers));
+    }
+
+    public Response deleteUser() {
+        UserEntity user = holder.current();
+        service.deleteByUser(user);
+        return Response.ok("회원 탈퇴 성공");
     }
 }
