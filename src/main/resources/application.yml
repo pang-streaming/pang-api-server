@@ -48,6 +48,10 @@ spring:
     user:
       name: ${SWAGGER_USER}
       password: ${SWAGGER_PASSWORD}
+  elasticsearch:
+    username: ${ES_USER}
+    password: ${ES_PASSWORD}
+    uris: ${ES_HOST}
 
 springdoc:
   swagger-ui:

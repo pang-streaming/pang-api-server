@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SaveType {
     STREAM_KEY("stream_key::"),
+    WATCH_HISTORY("watch_history::"),
     ;
     private final String value;
 }

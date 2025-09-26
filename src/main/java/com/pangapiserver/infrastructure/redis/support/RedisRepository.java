@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class RedisRepository {
@@ -19,5 +21,16 @@ public class RedisRepository {
 
     public void delete(SaveType type, String key) {
         redisTemplate.delete(type.getValue().concat(key));
+    }
+
+    public void saveHistory(SaveType type, String userId, String value) {
+        String key = type.getValue().concat(userId);
+        redisTemplate.opsForList().remove(key, 0, value);
+        redisTemplate.opsForList().leftPush(key, value);
+        redisTemplate.opsForList().trim(key, 0, 9);
+    }
+
+    public List<String> getHistory(SaveType type, String userId) {
+        return redisTemplate.opsForList().range(type.getValue().concat(userId), 0, 9);
     }
 }

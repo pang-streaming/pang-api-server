@@ -4,7 +4,8 @@ import com.pangapiserver.domain.stream.entity.StreamEntity;
 import com.pangapiserver.domain.stream.exception.StreamNotFoundException;
 import com.pangapiserver.domain.stream.repository.StreamRepository;
 import com.pangapiserver.domain.user.entity.UserEntity;
-import com.pangapiserver.infrastructure.security.support.UserAuthenticationHolder;
+import com.pangapiserver.infrastructure.redis.support.RedisRepository;
+import com.pangapiserver.infrastructure.redis.support.SaveType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,19 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class StreamService {
     private final StreamRepository repository;
+    private final RedisRepository redisRepository;
 
     public List<StreamEntity> getAll() {
         return repository.findAllByOrderByIdDesc();
     }
 
-    public StreamEntity getByStreamId(UUID streamId) {
-        return repository.findById(streamId)
+    public StreamEntity getByStreamId(UUID streamId, UserEntity user) {
+        StreamEntity stream = repository.findById(streamId)
             .orElseThrow(StreamNotFoundException::new);
+        if (stream.getEndAt() != null) {
+            redisRepository.saveHistory(SaveType.WATCH_HISTORY, user.getId().toString(), streamId.toString());
+        }
+        return stream;
     }
 
     public List<StreamEntity> getLiveStreams() {
