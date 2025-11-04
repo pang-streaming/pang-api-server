@@ -2,3 +2,4 @@ rootProject.name = 'pang-api-server'
 
 include('pang-database')
 include('pang-gateway')
+include('pang-api')

@@ -39,7 +39,6 @@ subprojects {
             implementation 'org.jetbrains.kotlin:kotlin-reflect'
             implementation 'org.jetbrains.kotlin:kotlin-stdlib'
         }
-        tasks.register("prepareKotlinBuildScriptModel"){}
     } else {
         apply plugin: 'java'
 
@@ -54,6 +53,7 @@ subprojects {
             annotationProcessor 'org.projectlombok:lombok'
         }
     }
+    tasks.register("prepareKotlinBuildScriptModel"){}
 
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
